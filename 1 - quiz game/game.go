@@ -58,20 +58,22 @@ main:
 
 func parseQuiz(filePath string, shuffle bool) []questionAnswer {
 
-	fmt.Println(shuffle)
-
 	file, err := os.Open(filePath)
+
 	defer file.Close()
+
 	if err != nil {
 		panic(err)
 	}
 
 	records, err := csv.NewReader(bufio.NewReader(file)).ReadAll()
+
 	if err != nil {
 		panic(err)
 	}
 
 	parsed := []questionAnswer{}
+
 	for _, rec := range records {
 		parsed = append(parsed, questionAnswer{question: rec[0], answer: rec[1]})
 	}
